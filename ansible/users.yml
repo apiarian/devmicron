@@ -1,3 +1,6 @@
 ---
-- debug:
-  msg: a task to do
+- name: Setup Users?
+  hosts: localhost
+  tasks:
+  - debug: 
+      msg: a task to do
