@@ -1,5 +1,6 @@
 ---
 - name: DevMicron
+  hosts: localhost
   tasks:
     - name: do a thing
       command: "touch /ansible_was_here"
