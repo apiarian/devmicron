@@ -1,0 +1,5 @@
+---
+- name: DevMicron
+  tasks:
+    - name: do a thing
+      command: "touch /ansible_was_here"
