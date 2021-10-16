@@ -1,4 +1,3 @@
 ---
-- name: sortof a thing
-  debug:
+- debug:
   msg: a task to do
