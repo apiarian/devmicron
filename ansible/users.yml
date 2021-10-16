@@ -1,7 +1,4 @@
 ---
-- name: User Setup
-  hosts: localhost
-  tasks:
-    - name: sortof a thing
-      debug:
-      msg: a task to do
+- name: sortof a thing
+  debug:
+  msg: a task to do
