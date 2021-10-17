@@ -4,6 +4,7 @@
     name:
       - tmux
       - mosh
+      - urlview
     state: latest
     
 - name: Upgrade all packages

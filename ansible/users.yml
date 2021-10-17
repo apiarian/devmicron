@@ -4,3 +4,17 @@
     name: aleksandr
     comment: Aleksandr Pasechnik
     groups: wheel,users
+
+- name: Install TPM for plugins
+  git:
+    repo: "https://github.com/tmux-plugins/tpm.git"
+    dest: /home/aleksandr/.tmux/plugins/tpm
+  become: true
+  become_user: aleksandr
+
+- name: Install Tmux Config
+  ansible.builtin.copy:
+    src: tmux.conf
+    dest: /home/aleksandr/.tmux.conf
+    owner: aleksandr
+    group: users
