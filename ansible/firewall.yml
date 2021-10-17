@@ -1,6 +1,6 @@
 ---
 - name: Allow Mosh
   ansible.posix.firewalld:
-    port: 60000:61000/udb
+    port: 60000-61000/udb
     permanent: yes
     state: enabled
