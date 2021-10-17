@@ -3,6 +3,6 @@
   hosts: localhost
   tasks:
     - name: setup users
-      include: users.yml
+      include_tasks: users.yml
     - name: do a thing
       command: "touch /ansible_was_here"
