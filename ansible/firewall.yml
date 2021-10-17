@@ -4,3 +4,4 @@
     port: 60000-61000/udp
     permanent: yes
     state: enabled
+    immediate: yes
