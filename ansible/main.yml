@@ -4,5 +4,6 @@
   tasks:
     - name: setup users
       import_tasks: users.yml
-    - name: do a thing
-      command: "touch /ansible_was_here"
+      
+    - name: Install Software
+      import_tasks: installs.yml

@@ -1,0 +1,11 @@
+---
+- name: Install User Tools
+  dnf:
+    name:
+      - tmux
+    state: latest
+    
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
