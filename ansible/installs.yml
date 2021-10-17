@@ -3,6 +3,7 @@
   dnf:
     name:
       - tmux
+      - mosh
     state: latest
     
 - name: Upgrade all packages
