@@ -3,4 +3,4 @@
   ansible.builtin.user:
     name: aleksandr
     comment: Aleksandr Pasechnik
-    groups: wheel,users,aleksandr
+    groups: wheel,users
