@@ -7,3 +7,6 @@
       
     - name: Install Software
       import_tasks: installs.yml
+      
+    - name: Setup Firewall
+      import_tasks: firewall.yml
