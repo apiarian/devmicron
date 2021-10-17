@@ -1,3 +1,6 @@
 ---
-- debug: 
-    msg: a task to do
+- name: Add main user.
+  ansible.builtin.user:
+    name: aleksandr
+    comment: Aleksandr Pasechnik
+    groups: wheel,users,aleksandr
