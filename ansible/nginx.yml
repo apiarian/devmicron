@@ -33,3 +33,17 @@
   ansible.builtin.systemd:
     name: nginx
     state: reloaded
+
+- name: Make sure certbot refreshes correctly
+  ansible.builtin.lineinfile:
+    path: /etc/sysconfig/certbot
+    regexp: '^POST_HOOK='
+    line: POST_HOOK="--post-hook 'systemctl reload nginx'"
+    owner: root
+    group: root
+
+- name: Setup certbot refreshes
+  ansible.builtin.systemd:
+    name: certbot-renew.timer
+    state: started
+    enabled: yes
