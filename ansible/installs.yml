@@ -6,6 +6,14 @@
       - mosh
       - urlview
     state: latest
+
+- name: Webserver
+  dnf:
+    name:
+      - nginx
+      - certbot
+      - python3-certbot-nginx
+    state: latest
     
 - name: Upgrade all packages
   dnf:

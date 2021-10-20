@@ -1,0 +1,35 @@
+---
+- name: Disable Default Nginx
+  ansible.builtin.copy:
+    content: "deny all; return 444;"
+    dest: /etc/nginx/default.d/disable.conf
+    owner: root
+    group: root
+
+- name: Setup HTTP redirection
+  ansible.builtin.template:
+    src: http.conf.j2
+    dest: /etc/nginx/conf.d/http.conf
+    owner: root
+    group: root
+
+- name: Create certificate
+  shell: certbot certonly -d {{ service_host }} --nginx -n --agree-tos -m al@megamicron.net
+
+- name: Setup HTTPS server
+  ansible.builtin.template:
+    src: https.conf.j2
+    dest: /etc/nginx/conf.d/https.conf
+    owner: root
+    group: root
+
+- name: Enable Nginx
+  ansible.builtin.systemd:
+    name: nginx
+    enabled: yes
+    state: started
+
+- name: Reload Nginx Configs
+  ansible.builtin.systemd:
+    name: nginx
+    state: reloaded

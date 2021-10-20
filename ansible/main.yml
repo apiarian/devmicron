@@ -1,6 +1,8 @@
 ---
 - name: DevMicron
   hosts: localhost
+  vars:
+    service_host: dev.megamicron.net
   tasks:
     - name: setup users
       import_tasks: users.yml
@@ -10,3 +12,6 @@
       
     - name: Setup Firewall
       import_tasks: firewall.yml
+
+    - name: Setup Nginx
+      import_tasks: nginx.yml
