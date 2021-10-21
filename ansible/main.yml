@@ -15,3 +15,6 @@
 
     - name: Setup Nginx
       import_tasks: nginx.yml
+
+    - name: Setup IPFS
+      import_tasks: ipfs.yml

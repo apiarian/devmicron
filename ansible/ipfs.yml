@@ -1,0 +1,22 @@
+---
+- name: See if updater already exists
+  ansible.builtin.stat:
+    path: /usr/local/bin/ipfs-update
+  register: ipfs_update_stat
+
+- name: Download IPFS Updater
+  ansible.builtin.unarchive:
+    src: https://dist.ipfs.io/ipfs-update/v1.7.1/ipfs-update_v1.7.1_linux-amd64.tar.gz
+    dest: /tmp
+    remote_src: yes
+  when: not ipfs_update_stat.stat.exists
+  register: downloaded_ipfs_updater
+
+- name: Install IPFS Updater
+  ansible.builtin.shell: ./install.sh
+  args:
+    chdir: "{{ downloaded_ipfs_updater.dest }}/ipfs-update"
+  when: not ipfs_update_stat.stat.exists
+  
+- name: Install the Latest IPFS
+  ansible.builtin.command: /usr/local/bin/ipfs-update install latest
