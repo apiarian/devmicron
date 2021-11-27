@@ -20,3 +20,59 @@
   
 - name: Install the Latest IPFS
   ansible.builtin.command: /usr/local/bin/ipfs-update install latest
+
+- name: Add IPFS user
+  ansible.builtin.user:
+    name: ipfs
+    comment: IPFS
+    system: yes
+
+- name: Get IPFS Systemd File
+  get_url:
+    url: https://raw.githubusercontent.com/ipfs/go-ipfs/master/misc/systemd/ipfs-hardened.service
+    dest: /usr/lib/systemd/system/ipfs-hardened.service
+
+- name: Create directory for IPFS Systemd Modifications
+  ansible.builtin.file:
+    path: /etc/systemd/system/ipfs-hardened.service.d
+    state: directory
+
+- name: Add IPFS Systemd Modifications
+  ansible.builtin.template:
+    src: ipfs-service-override.conf.j2
+    dest: /etc/systemd/system/ipfs-hardened.service.d/override.conf
+    owner: root
+    group: root
+
+- name: Reload Systemd
+  command: systemctl daemon-reload
+
+- name: Install IPFS Systemd Service
+  ansible.builtin.service:
+    name: ipfs-hardened
+    state: restarted
+    enabled: yes
+
+- name: See if ipfs webui is cloned
+  ansible.builtin.stat:
+    path: /usr/src/ipfs-webui
+  register: ipfs_webui_stat
+
+- name: Clone IPFS WebUI
+  command: git clone https://github.com/ipfs/ipfs-webui.git /usr/src/ipfs-webui
+  when: not ipfs_webui_stat.stat.exists
+
+- name: Pull IPFS WebUI
+  command: git pull
+  args:
+    chdir: /usr/src/ipfs-webui
+
+- name: Install IPFS WebUI
+  command: npm install
+  args:
+    chdir: /usr/src/ipfs-webui
+
+- name: Build IPFS WebUI
+  command: npm run build
+  args:
+    chdir: /usr/src/ipfs-webui

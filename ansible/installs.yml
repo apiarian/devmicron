@@ -20,6 +20,13 @@
       - certbot
       - python3-certbot-nginx
     state: latest
+
+- name: IPFS Dependencies
+  dnf:
+    name:
+      - nodejs
+      - npm
+    state: latest
     
 - name: Upgrade all packages
   dnf:

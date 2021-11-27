@@ -1,0 +1,13 @@
+# Overwrite various configs. Apparently we have to repeat entries twice to override them.
+
+[Service]
+
+Environment=
+Environment=IPFS_PATH=/var/lib/ipfs
+
+ExecStartPre=/usr/local/bin/ipfs config Datastore.StorageMax "5GB"
+ExecStartPre=/usr/local/bin/ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+ExecStartPre=/usr/local/bin/ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["PUT", "GET", "POST", "OPTIONS"]'
+
+ExecStart=
+ExecStart=/usr/local/bin/ipfs daemon --init --init-profile=server --migrate --enable-gc --enable-pubsub-experiment --enable-namesys-pubsub
