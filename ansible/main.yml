@@ -4,17 +4,19 @@
   vars:
     service_host: dev.megamicron.net
   tasks:
+    # - name: enable swap
+    #   import_tasks: swap.yml
     # - name: setup users
     #   import_tasks: users.yml
     #   
     # - name: Install Software
     #   import_tasks: installs.yml
     #   
-    # - name: Setup Firewall
-    #   import_tasks: firewall.yml
+    - name: Setup Firewall
+      import_tasks: firewall.yml
 
-    # - name: Setup Nginx
-    #   import_tasks: nginx.yml
+    - name: Setup Nginx
+      import_tasks: nginx.yml
 
     - name: Setup IPFS
       import_tasks: ipfs.yml

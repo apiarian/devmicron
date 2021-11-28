@@ -1,0 +1,23 @@
+---
+- name: See if the swapfile already exists
+  ansible.builtin.stat:
+    path: /swapfile
+  register: swapfile_stat
+
+- name: Make the Swapfile
+  shell: dd if=/dev/zero of=/swapfile bs=1024 count=2097152
+  when: not swapfile_stat.stat.exists
+
+- name: Setup the Swapfile
+  shell: mkswap /swapfile
+  when: not swapfile_stat.stat.exists
+
+- name: Enable the Swapfile now
+  shell: swapon /swapfile
+  when: not swapfile_stat.stat.exists
+
+- name: Wire up the Swapfile for restarts
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    regexp: '^\/swapfile'
+    line: /swapfile swap swap defaults 0 0 

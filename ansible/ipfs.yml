@@ -66,13 +66,16 @@
   command: git pull
   args:
     chdir: /usr/src/ipfs-webui
+  register: gitpull_output
 
 - name: Install IPFS WebUI
   command: npm install
   args:
     chdir: /usr/src/ipfs-webui
+  when: gitpull_output.stdout != "Already up to date."
 
 - name: Build IPFS WebUI
   command: npm run build
   args:
     chdir: /usr/src/ipfs-webui
+  when: gitpull_output.stdout != "Already up to date."

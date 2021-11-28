@@ -3,7 +3,8 @@ server {
   listen [::]:443 ssl http2;
   server_name {{ service_host }};
 
-  root /usr/share/nginx/html;
+  # root /usr/share/nginx/html;
+  root /usr/src/ipfs-webui/build;
 
   index index.html index.html;
 
