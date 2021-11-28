@@ -5,10 +5,3 @@
     permanent: yes
     state: enabled
     immediate: yes
-
-- name: Allow IPFS
-  ansible.posix.firewalld:
-    port: 5001/tcp
-    permanent: yes
-    state: enabled
-    immediate: yes

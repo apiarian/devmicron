@@ -1,4 +1,7 @@
 ---
+- name: Allow Nginx to proxy local things
+  command: setsebool -P httpd_can_network_connect 1
+
 - name: Disable Default Nginx
   ansible.builtin.copy:
     content: "deny all; return 444;"
